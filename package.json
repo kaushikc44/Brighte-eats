@@ -5,5 +5,8 @@
     "packages/shared",
     "packages/backend",
     "packages/frontend"
-  ]
+  ],
+  "dependencies": {
+    "react-router-dom": "^7.18.0"
+  }
 }

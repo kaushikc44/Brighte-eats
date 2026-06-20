@@ -1,1 +1,252 @@
-/* Frontend - structure placeholder */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background: #f5f5f5;
+  color: #1a1a1a;
+  padding: 20px;
+}
+
+.container {
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+header {
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+header h1 {
+  font-size: 1.8rem;
+  color: #00a651;
+}
+
+header p {
+  color: #666;
+  margin-top: 4px;
+}
+
+.form-card {
+  background: white;
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  margin-bottom: 24px;
+}
+
+.form-card h2 {
+  margin-bottom: 16px;
+  font-size: 1.2rem;
+}
+
+label {
+  display: block;
+  margin-bottom: 12px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #333;
+}
+
+label input[type="text"],
+label input[type="email"],
+label input[type="tel"] {
+  display: block;
+  width: 100%;
+  margin-top: 4px;
+  padding: 10px 12px;
+  font-size: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+label input:focus {
+  border-color: #00a651;
+}
+
+.field-error {
+  display: block;
+  margin-top: 4px;
+  font-size: 0.8rem;
+  color: #e53e3e;
+  font-weight: 400;
+}
+
+fieldset {
+  border: none;
+  margin-bottom: 16px;
+}
+
+legend {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #333;
+  margin-bottom: 8px;
+}
+
+.checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 400;
+  margin-bottom: 6px;
+}
+
+.checkbox-label input {
+  width: 18px;
+  height: 18px;
+  accent-color: #00a651;
+}
+
+button {
+  width: 100%;
+  padding: 12px;
+  font-size: 1rem;
+  font-weight: 600;
+  color: white;
+  background: #00a651;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+button:hover:not(:disabled) {
+  background: #008f44;
+}
+
+button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.message {
+  margin-top: 12px;
+  padding: 10px;
+  border-radius: 8px;
+  text-align: center;
+  font-size: 0.9rem;
+}
+
+.message.success {
+  background: #e6ffed;
+  color: #1a7f3e;
+}
+
+.message.error {
+  background: #ffe6e6;
+  color: #c53030;
+}
+
+.leads-section {
+  background: white;
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.leads-section h2 {
+  margin-bottom: 16px;
+  font-size: 1.2rem;
+}
+
+.loading,
+.empty {
+  color: #888;
+  text-align: center;
+  padding: 20px 0;
+}
+
+.leads-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.lead-card {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 14px;
+  background: #fafafa;
+  border-radius: 8px;
+  border: 1px solid #eee;
+}
+
+.lead-card strong {
+  font-size: 1rem;
+}
+
+.lead-card span {
+  font-size: 0.85rem;
+  color: #555;
+}
+
+.postcode {
+  font-weight: 500;
+  color: #00a651 !important;
+}
+
+.services {
+  display: flex;
+  gap: 6px;
+  margin-top: 6px;
+  flex-wrap: wrap;
+}
+
+.service-tag {
+  background: #e6ffed;
+  color: #1a7f3e;
+  font-size: 0.75rem;
+  padding: 3px 10px;
+  border-radius: 12px;
+  font-weight: 500;
+}
+
+/* Nav */
+nav {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+nav a {
+  text-decoration: none;
+  color: #00a651;
+  font-weight: 600;
+  padding: 8px 16px;
+  border-radius: 8px;
+  background: white;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+}
+
+nav a:hover {
+  background: #00a651;
+  color: white;
+}
+
+/* Filter bar */
+.filter-bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.filter-bar label {
+  margin: 0;
+  font-weight: 500;
+}
+
+.filter-bar select {
+  padding: 6px 12px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 0.9rem;
+}
