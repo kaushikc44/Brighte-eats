@@ -7,6 +7,8 @@ export default function LeadsPage() {
   const [leads, setLeads] = useState([])
   const [filter, setFilter] = useState('all')
   const [loading, setLoading] = useState(true)
+  const [summaries, setSummaries] = useState({})
+  const [summarizing, setSummarizing] = useState({})
 
   const fetchLeads = async () => {
     setLoading(true)
@@ -24,6 +26,19 @@ export default function LeadsPage() {
   useEffect(() => {
     fetchLeads()
   }, [])
+
+  const getSummary = async (lead) => {
+    setSummarizing(prev => ({ ...prev, [lead.id]: true }))
+    try {
+      const res = await fetch(`${API}/leads/${lead.id}/summary`, { method: 'POST' })
+      const data = await res.json()
+      setSummaries(prev => ({ ...prev, [lead.id]: data.summary }))
+    } catch {
+      setSummaries(prev => ({ ...prev, [lead.id]: `${lead.name} is interested in ${lead.service?.join(', ') || 'services'}.` }))
+    } finally {
+      setSummarizing(prev => ({ ...prev, [lead.id]: false }))
+    }
+  }
 
   const filtered = filter === 'all'
     ? leads
@@ -61,6 +76,19 @@ export default function LeadsPage() {
                 {lead.service.map(s => (
                   <span key={s} className="service-tag">{s}</span>
                 ))}
+              </div>
+              <div className="summary-section">
+                {summaries[lead.id] ? (
+                  <p className="ai-summary">✨ {summaries[lead.id]}</p>
+                ) : (
+                  <button
+                    className="summary-btn"
+                    onClick={() => getSummary(lead)}
+                    disabled={summarizing[lead.id]}
+                  >
+                    {summarizing[lead.id] ? 'Thinking...' : '✨ Summarize'}
+                  </button>
+                )}
               </div>
             </div>
           ))}

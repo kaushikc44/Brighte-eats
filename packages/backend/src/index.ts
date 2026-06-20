@@ -1,7 +1,10 @@
 import express from 'express';
 import cors from 'cors';
+import { config } from 'dotenv';
 import { UserSchema } from '@brighte/shared';
 import { Creation, Insertion, retrieval, filterType, RetrievalOne, UpdateLead, DeleteLead } from './database.js';
+
+config();
 
 const app = express();
 const PORT = 3001;
@@ -61,6 +64,50 @@ app.put('/leads/:id', (req, res) => {
 
     UpdateLead(id, result.data);
     return res.json({ message: "Lead updated successfully" });
+});
+
+// POST /leads/:id/summary — AI summary of lead's interests via Gemini
+app.post('/leads/:id/summary', async (req, res) => {
+    const id = parseInt(req.params.id);
+    if (isNaN(id)) return res.status(400).json({ error: "Invalid ID" });
+
+    const lead = RetrievalOne(id);
+    if (!lead) return res.status(404).json({ error: "Lead not found" });
+
+    const services = lead.service?.join(', ') || 'none';
+    const apiKey = process.env.GEMINI_API_KEY;
+
+    if (!apiKey) {
+        return res.json({ summary: `${lead.name} is interested in ${services}.` });
+    }
+
+    const prompt = `Write one short, natural sentence summarizing what services this user is interested in. Keep it under 20 words and friendly.
+
+User name: ${lead.name}
+Interested in: ${services}
+
+Summary:`;
+
+    try {
+        const response = await fetch(
+            `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`,
+            {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    contents: [{ parts: [{ text: prompt }] }],
+                    generationConfig: { temperature: 0.5, maxOutputTokens: 50 }
+                })
+            }
+        );
+
+        const data = await response.json();
+        const summary = data?.candidates?.[0]?.content?.parts?.[0]?.text?.trim()
+            || `${lead.name} is interested in ${services}.`;
+        return res.json({ summary });
+    } catch {
+        return res.json({ summary: `${lead.name} is interested in ${services}.` });
+    }
 });
 
 // DELETE /leads/:id — Delete a lead

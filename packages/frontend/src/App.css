@@ -250,3 +250,42 @@ nav a:hover {
   border-radius: 8px;
   font-size: 0.9rem;
 }
+
+/* Summary section */
+.lead-card .summary-section {
+  margin-top: 10px;
+  text-align: right;
+}
+
+.summary-btn {
+  background: #667eea;
+  color: white;
+  border: none;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 13px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.summary-btn:hover {
+  background: #764ba2;
+  transform: translateY(-1px);
+}
+
+.summary-btn:disabled {
+  opacity: 0.6;
+  cursor: wait;
+}
+
+.ai-summary {
+  background: #f0f4ff;
+  border-left: 3px solid #667eea;
+  padding: 8px 12px;
+  margin: 8px 0 0;
+  font-size: 13px;
+  font-style: italic;
+  color: #555;
+  border-radius: 0 8px 8px 0;
+  text-align: left;
+}
