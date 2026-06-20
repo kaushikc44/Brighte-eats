@@ -7,7 +7,7 @@ import { Creation, Insertion, retrieval, filterType, RetrievalOne, UpdateLead, D
 config();
 
 const app = express();
-const PORT = 3001;
+const PORT = 3003;
 
 app.use(cors());
 app.use(express.json());
@@ -90,7 +90,7 @@ Summary:`;
 
     try {
         const response = await fetch(
-            `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`,
+            `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-lite:generateContent?key=${apiKey}`,
             {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },

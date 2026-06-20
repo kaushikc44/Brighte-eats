@@ -2,7 +2,7 @@
 import { useState } from 'react'
 import { UserSchema } from '@brighte/shared'
 
-const API = 'http://localhost:3001'
+const API = 'http://localhost:3003'
 
 export default function SubmitPage() {
   const [form, setForm] = useState({

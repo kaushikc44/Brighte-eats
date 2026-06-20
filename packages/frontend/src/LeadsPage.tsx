@@ -1,7 +1,7 @@
 // @ts-nocheck
 import { useState, useEffect } from 'react'
 
-const API = 'http://localhost:3001'
+const API = 'http://localhost:3003'
 
 export default function LeadsPage() {
   const [leads, setLeads] = useState([])
