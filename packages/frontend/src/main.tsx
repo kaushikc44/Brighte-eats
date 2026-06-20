@@ -1,0 +1,1 @@
+// Frontend - structure placeholder

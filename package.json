@@ -1,0 +1,9 @@
+{
+  "name": "brighte-eats",
+  "private": true,
+  "workspaces": [
+    "packages/shared",
+    "packages/backend",
+    "packages/frontend"
+  ]
+}
