@@ -2,5 +2,9 @@
   "name": "@brighte/shared",
   "version": "0.0.1",
   "private": true,
-  "type": "module"
+  "type": "module",
+  "main": "src/zodimplementation.ts",
+  "dependencies": {
+    "zod": "^3.23.0"
+  }
 }
