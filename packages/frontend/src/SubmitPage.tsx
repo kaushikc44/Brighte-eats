@@ -1,62 +1,7 @@
-// @ts-nocheck
-import { useState } from 'react'
-import { UserSchema } from '@brighte/shared'
-
-const API = 'http://localhost:3003'
+import { useLeadForm } from './hooks/useLeadForm'
 
 export default function SubmitPage() {
-  const [form, setForm] = useState({
-    name: '',
-    email: '',
-    mobile: '',
-    postcode: '',
-    service: [],
-  })
-  const [submitting, setSubmitting] = useState(false)
-  const [success, setSuccess] = useState('')
-  const [error, setError] = useState('')
-
-  const set = (field, value) => {
-    setForm({ ...form, [field]: value })
-  }
-
-  const toggleService = (s) => {
-    const current = form.service
-    if (current.includes(s)) {
-      set('service', current.filter(v => v !== s))
-    } else {
-      set('service', [...current, s])
-    }
-  }
-
-  const handleSubmit = async (e) => {
-    e.preventDefault()
-    setSuccess('')
-    setError('')
-
-    const result = UserSchema.safeParse(form)
-    if (!result.success) {
-      const firstError = result.error.issues[0].message
-      setError(firstError)
-      return
-    }
-
-    setSubmitting(true)
-    try {
-      const res = await fetch(`${API}/leads`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(result.data),
-      })
-      if (!res.ok) throw new Error('Something went wrong')
-      setSuccess('Successfully submitted!')
-      setForm({ name: '', email: '', mobile: '', postcode: '', service: [] })
-    } catch (err) {
-      setError(err.message || 'Failed to submit')
-    } finally {
-      setSubmitting(false)
-    }
-  }
+  const { form, set, toggleService, submitting, success, error, submit } = useLeadForm()
 
   return (
     <div className="form-card">
@@ -64,7 +9,7 @@ export default function SubmitPage() {
       {success && <p className="message success">{success}</p>}
       {error && <p className="message error">{error}</p>}
 
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={submit}>
         <label>
           Name
           <input type="text" value={form.name} onChange={e => set('name', e.target.value)} placeholder="Your name" />
